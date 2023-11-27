@@ -20,13 +20,13 @@ public class ItemService {
 	@Autowired
 	private LibraryRepository libraryRepository;
 
-	public Long createItem(Long libraryId, Item book) {
+	public Long createItem(Long libraryId, Item item) {
 		final Library lib = libraryRepository.findById(libraryId).orElseThrow(() -> {
 			return new LibraryNotFoundException(libraryId);
 		});
 
-		book.setLibrary(lib);
-		return itemRepository.save(book).getId();
+		item.setLibrary(lib);
+		return itemRepository.save(item).getId();
 	}
 
 	public List<Item> getItems(Long libraryId) {		
