@@ -21,5 +21,9 @@ public class LibraryService {
 	public Long createLibrary(final Library library) {
 		return libraryRepository.save(library).getId();
 	}
+
+	public void deleteLibrary(final Long id) {
+		libraryRepository.deleteById(id);
+	}
 	
 }
