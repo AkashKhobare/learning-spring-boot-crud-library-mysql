@@ -37,4 +37,15 @@ public class ItemService {
 		return itemRepository.findByLibraryId(libraryId);
 	}
 
+	public void deleteItems(Long libraryId) {
+		final Library lib = libraryRepository.findById(libraryId)
+			.orElseThrow(() -> new LibraryNotFoundException(libraryId));
+		
+		itemRepository.deleteInBatch(lib.getItems());
+	}
+
+	public void deleteItem(Long itemId) {
+		itemRepository.deleteById(itemId);
+	}
+
 }
