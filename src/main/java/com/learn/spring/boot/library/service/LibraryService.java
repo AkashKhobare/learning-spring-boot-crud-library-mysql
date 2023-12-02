@@ -10,6 +10,7 @@ import com.learn.spring.boot.library.exception.UserNotFoundException;
 import com.learn.spring.boot.library.model.Library;
 import com.learn.spring.boot.library.model.User;
 import com.learn.spring.boot.library.repository.LibraryRepository;
+import com.learn.spring.boot.library.repository.UserRepository;
 
 @Service
 public class LibraryService {
