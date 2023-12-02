@@ -15,7 +15,7 @@ import com.learn.spring.boot.library.model.Item;
 import com.learn.spring.boot.library.service.ItemService;
 
 @RestController
-@RequestMapping("${app.api.path}/libraries/{library_id}/items")
+@RequestMapping("${app.api.path}/users/{user_id}/libraries/{library_id}/items")
 public class ItemController {
 
 	@Autowired
