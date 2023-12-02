@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learn.spring.boot.library.exception.LibraryNotFoundException;
+import com.learn.spring.boot.library.exception.UserNotFoundException;
 import com.learn.spring.boot.library.model.Library;
+import com.learn.spring.boot.library.model.User;
 import com.learn.spring.boot.library.repository.LibraryRepository;
 
 @Service
@@ -14,12 +16,17 @@ public class LibraryService {
 
 	@Autowired
 	private LibraryRepository libraryRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
-	public List<Library> getLibraries() {
-		return libraryRepository.findAll();
+	public List<Library> getLibraries(Long userId) {
+		return libraryRepository.findByUserId(userId);
 	}
 
-	public Long createLibrary(final Library library) {
+	public Long createLibrary(Long userId, final Library library) {
+		final User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+		library.setUser(user);
 		return libraryRepository.save(library).getId();
 	}
 

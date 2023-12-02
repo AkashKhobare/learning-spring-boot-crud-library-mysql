@@ -1,16 +1,18 @@
 package com.learn.spring.boot.library.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Item {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,9 +20,9 @@ public class Item {
 
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Library library;
+	private List<Library> libraries;
 
 	public Long getId() {
 		return id;
@@ -38,12 +40,12 @@ public class Item {
 		this.name = name;
 	}
 
-	public Library getLibrary() {
-		return library;
+	public List<Library> getLibraries() {
+		return libraries;
 	}
 
-	public void setLibrary(Library library) {
-		this.library = library;
+	public void setLibraries(List<Library> libraries) {
+		this.libraries = libraries;
 	}
 
 }
