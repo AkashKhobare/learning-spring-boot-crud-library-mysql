@@ -16,15 +16,15 @@ import com.learn.spring.boot.library.model.Library;
 import com.learn.spring.boot.library.service.LibraryService;
 
 @RestController
-@RequestMapping("${app.api.path}")
+@RequestMapping("${app.api.path}/users/{user_id}/libraries")
 public class LibraryController {
 
 	@Autowired
 	private LibraryService libraryService;
 
 	@GetMapping
-	public List<Library> getLibraries() {
-		return libraryService.getLibraries();
+	public List<Library> getLibraries(@PathVariable("user_id") Long userId) {
+		return libraryService.getLibraries(userId);
 	}
 	
 	@GetMapping("/{id}")
@@ -33,8 +33,8 @@ public class LibraryController {
 	}
 
 	@PostMapping
-	public Long createLibrary(@RequestBody Library library) {
-		return libraryService.createLibrary(library);
+	public Long createLibrary(@PathVariable("user_id") Long userId, @RequestBody Library library) {
+		return libraryService.createLibrary(userId, library);
 	}
 
 	@DeleteMapping
